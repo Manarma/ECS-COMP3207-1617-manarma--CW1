@@ -7,7 +7,7 @@ You will need to download/install [node](http://nodejs.org/download/) and [Herok
 	* If you are using the binary versions, you'll need to setup your `PATH` so that the `node`, `npm` and `heroku` tools can be accessed from the command-line.
 
 ##Running the application
-From a locally cloned copy of your `COMP3207-CW1-1415` repository you can issue the following commands to run for the first time:
+From a locally cloned copy of your `ECS-COMP3207-1415/<your-github-id>-CW1` repository you can issue the following commands to run for the first time:
 
 	npm install
 	node web.js
@@ -17,7 +17,7 @@ On subsequent runs you won't need to run the `npm install` command. Once the app
 ##Connecting to your application
 There are two ways to connect to the MUD: via the commmand-line, or via the built-in web interface. To access the web interface, open a browser and navigate to [http://localhost:5000/](http://localhost:5000/). 
 
-To connect via the command-line, you can use a `wscat` tool that was built when you performed the `npm install` command. `wscat` can be found at `COMP3207-CW1-1415/node_modules/ws/bin/wscat` and run using the following command:
+To connect via the command-line, you can use a `wscat` tool that was built when you performed the `npm install` command. `wscat` can be found at `<your-github-id>-CW1/node_modules/ws/bin/wscat` and run using the following command:
 
 	wscat --connect http://localhost:5000/ws
 

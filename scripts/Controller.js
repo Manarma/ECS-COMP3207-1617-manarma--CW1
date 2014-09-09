@@ -36,7 +36,16 @@ var controller = {
 				controller.defaultRoom = room;
 			} else {
 				sequelize_fixtures.loadFile('data/small.json', {MUDObject: db.MUDObject}, function() {
-					controller.init();
+					if (db.sequelize.options.dialect === 'postgres') {
+						//postgres seems to get itself in a mess with sequelize_fixtures and lose track of the auto-incrementing object ids, so we reset it manually here:
+						db.sequelize.query('SELECT setval(pg_get_serial_sequence(\'"MUDObjects"\', \'id\'), (SELECT MAX(id) FROM "MUDObjects")+1);').success(
+							function() {
+								controller.init();
+							}
+						);
+					} else {
+						controller.init();
+					}
 				});
 			}
 		});
@@ -324,10 +333,13 @@ var controller = {
 			return;
 		}
 
+		var escName = db.sequelize.getQueryInterface().escape('%' + name.toLowerCase() +'%');
+
 		if (type) {
 			controller.loadMUDObjects(conn, 
 				db.Sequelize.and(
-					{name: {like: '%' + name + '%'}},
+					//{name: {like: '%' + name + '%'}},
+					"lower(name) LIKE " + escName,
 					{'type': type},
 					db.Sequelize.or(
 						{locationId: player.locationId},
@@ -338,7 +350,8 @@ var controller = {
 		} else {
 			controller.loadMUDObjects(conn, 
 				db.Sequelize.and(
-					{name: {like: '%' + name + '%'}},
+					//{name: {like: '%' + name + '%'}},
+					"lower(name) LIKE " + escName,
 					db.Sequelize.or(
 						{locationId: player.locationId},
 						{locationId: player.id}
@@ -371,13 +384,23 @@ var controller = {
 	 * @param type (db.MUDObject.type) type of objects to find (can be `undefined`)
 	 * @param ambigMsg message to show to the player if the query was ambiguous
 	 * @param failMsg message to show to the player if the query fails to find anything
+	 * @param requireDescription if more than one object is found, but only one has 
+ 	 *	 		a non-null description then call the callback with that object
 	 */
-	findPotentialMUDObject: function(conn, name, cb, allowMe, allowHere, type, ambigMsg, failMsg) {
+	findPotentialMUDObject: function(conn, name, cb, allowMe, allowHere, type, ambigMsg, failMsg, requireDescription) {
 		if (!ambigMsg) ambigMsg = strings.ambigSet;
 		if (!failMsg) failMsg = strings.dontSeeThat;
 
 		controller.findPotentialMUDObjects(conn, name, function(obj) {
 			if (obj && obj.length > 0) {
+				if (requireDescription===true && obj.length > 1) {
+					var nobj = obj.filter(function(o) {
+						return o.description !== null;
+					});
+					if (nobj.length === 1)
+						obj = nobj;
+				}
+
 				if (obj.length === 1) {
 					cb(obj[0]);
 				} else {
@@ -450,19 +473,27 @@ function fatalError(err, conn) {
 
 /**
  * Helper function for filtering objects matching a name beyond what is
- * (easily) accomplishable with Sequelize queries.
+ * (easily) accomplishable with Sequelize queries. Specifically requires
+ * whole word matches, rather than just sub-sequences of characters.
  */
 function filterPossible(obj, name) {
 	if (obj && obj.length > 0) {
 		var farr = obj.filter(function(o) {
-			if (o.name === name) return true;
+			if (o.name.toLowerCase() === name.toLowerCase()) return true;
 			
-			var strs = o.name.split(/[ ;]+/g);
+			var strs = o.name.toLowerCase().split(/[ ;]+/g);
+			var nstrs = name.toLowerCase().split(/[ ;]+/g);
+			var index = 0;
 
-			if (strs.indexOf(name)>=0)
-				return true;
+			for (var i=0; i<nstrs.length; i++) {
+				var newIndex = strs.indexOf(nstrs[i], index);
+				if (newIndex<index)
+					return false;
 
-			return false;
+				index = newIndex;
+			}
+
+			return true;
 		});
 
 		return farr;

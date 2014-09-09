@@ -235,7 +235,7 @@ var commands = {
 			} else {
 				controller.findPotentialMUDObject(conn, argsArr[0], function(obj) {
 					commands.look.look(conn, obj);
-				}, true, true);
+				}, true, true, undefined, undefined, undefined, true);
 			}
 		},
 		look: function(conn, obj) {

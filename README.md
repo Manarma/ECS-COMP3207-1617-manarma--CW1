@@ -32,7 +32,7 @@ You need to do two things to complete this coursework:
 ##Deliverables
 1. A working version of the MUD, deployed on the Heroku cloud platform
 2. A short (maximum of 2 A4 sides) report including the following:
-	* Your name, a link to your heroku app instance and your `COMP3207-CW1-1415` Github repository.
+	* Your name, a link to your heroku app instance and your `ECS-COMP3207-1415/<your-github-id>-CW1` Github repository.
 	* A description of any problems or challenges you encountered implementing the requirements.
 	* Details of how you performed testing of the application, and what tools you used.
 
@@ -51,9 +51,9 @@ Marks will be awarded for:
 Feedback will be given for each of these points. In addition, we will endeavour to make comments about your development methodology as evidenced through the GitHub commit logs.
 
 ##Getting started
-A requirement of this coursework is the use of GitHub to develop your code. We've created a GitHub organisation for the class to which your GitHub account should have been added. If you look in your GitHub account, you should see you have a `COMP3207-CW1-1415` repository. If you don't then [email](mailto:jsh2@ecs.soton.ac.uk) or speak to [Jon](http://ecs.soton.ac.uk/people/jsh2) immediately. Your individual copy of the `COMP3207-CW1-1415` repository is private to you and the lecturing staff involved with the course; the lecturers will be able to see any code you push, but fellow students will not. 
+A requirement of this coursework is the use of GitHub to develop your code. We've created a GitHub organisation for the class to which your GitHub account should have been added. If you look in your GitHub account, you should see you have a `ECS-COMP3207-1415/<your-github-id>-CW1` repository. If you don't then [email](mailto:jsh2@ecs.soton.ac.uk) or speak to [Jon](http://ecs.soton.ac.uk/people/jsh2) immediately. Your individual copy of the `ECS-COMP3207-1415/<your-github-id>-CW1` repository is private to you and the lecturing staff involved with the course; the lecturers will be able to see any code you push, but fellow students will not. 
 
-The `COMP3207-CW1-1415` repository contains the initial implementation of ECS-MUD, together with some documentation (this [README](README.md), the [brief guide to ECS-MUD](guide.md) and the [programmer's notes](notes.md). The [programmer's notes](notes.md) contain hints to help you run and develop the MUD.
+The `ECS-COMP3207-1415/<your-github-id>-CW1` repository contains the initial implementation of ECS-MUD, together with some documentation (this [README](README.md), the [brief guide to ECS-MUD](guide.md) and the [programmer's notes](notes.md). The [programmer's notes](notes.md) contain hints to help you run and develop the MUD.
 
 ##Questions
 If you have any problems/questions then [email](mailto:jsh2@ecs.soton.ac.uk) or speak to [Jon](http://ecs.soton.ac.uk/people/jsh2), either in his office, or in one of the drop-in sessions in the UG-lab we'll run during the course.
