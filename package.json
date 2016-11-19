@@ -1,6 +1,6 @@
 {
-  "name": "COMP3207-CW1-1415-<your-ecs-user-id>",
-  "version": "0.0.0",
+  "name": "COMP3207-CW1-1617-28989457",
+  "version": "1.0.0",
   "description": "Node MUD server",
   "main": "web.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/ECS-COMP3207-1415/<your-github-id>-CW1"
+    "url": "git://github.com/ECS-COMP3207-1617/manarma-CW1"
   },
-  "author": "<your-name>",
+  "author": "MMA",
   "license": "Southampton",
   "bugs": {
-    "url": "https://github.com/ECS-COMP3207-1415/<your-github-id>-CW1/issues"
+    "url": "https://github.com/ECS-COMP3207-1617/manarma-CW1/issues"
   },
-  "homepage": "https://github.com/ECS-COMP3207-1415/<your-github-id>-CW1",
+  "homepage": "https://github.com/ECS-COMP3207-1617/manarma-CW1",
   "dependencies": {
     "express": "^4.8.3",
     "jade": "^1.5.0",
@@ -27,6 +27,6 @@
     "ws": "^0.4.32"
   },
   "engines": {
-    "node": "0.10.30"
+    "node": "6.9.1"
   }
 }
